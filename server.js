@@ -6,9 +6,11 @@ app = express();
 const jsonData = { count: 12, message: 'hey' };
 
 app.get('/', function(req, res) {
-  res.sendFile(__dirname + '/index.html', function(err) {
-    if (err) res.status(500).send(err);
-  });
+  fs.readFile('index.html', function(err, buffer){
+    var html = buffer.toString();
+    res.setHeader('Content-Type', 'text/html');
+    res.send(html);
+  })
 });
 
 
